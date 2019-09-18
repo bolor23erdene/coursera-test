@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" placeholder="write display name" id="input">
+    <button onclick="play()">play</button>
+</body>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>\
+<script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-firestore.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyAF07CWSjfZxEuQjfEI9M-0l2puNcUs6aE",
+        authDomain: "moen-22130.firebaseapp.com",
+        databaseURL: "https://moen-22130.firebaseio.com",
+        projectId: "moen-22130",
+        storageBucket: "moen-22130.appspot.com",
+        messagingSenderId: "227107602456",
+        appId: "1:227107602456:web:9a5ef940fa5cbae0dc036d"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    const database = firebase.firestore();
+    
+    const name = document.getElementById("input");
+    
+    function play() {
+
+        
+        const game = {
+
+            "gamecreater": { "displayName": name.value },
+            "state": 1
+        }
+        const rooms = database.collection("rooms");
+        database.collection("rooms").where("state", "==", 1).limit(1)
+            .get()
+            .then(function (querySnapshot) {
+
+                if (querySnapshot.empty) {
+                    console.log('Room created.');
+                    rooms.add(game);
+                    return;
+                }
+
+                querySnapshot.forEach(function (doc) {
+
+                    let transaction = database.runTransaction(t => {
+                        let ref = rooms.doc(doc.id);
+                        return t.get(ref)
+                            .then(doc => {
+                                if (doc.data().state == 1)
+                                    t.update(ref, { state: 2, joiner: { displayName: name.value } });
+                            });
+                    }).then(result => {
+                        console.log(doc.id + " " + "-id tai room ru orloo");
+                    }).catch(err => {
+                        console.log('Transaction failure:', err);
+                        play();
+                    });
+
+
+
+                });
+            })
+            .catch(function (error) {
+                console.log("Error getting documents: ", error);
+            });
+    }
+
+</script>
+
+</html>
