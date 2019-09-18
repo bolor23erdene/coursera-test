@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-firestore.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyAF07CWSjfZxEuQjfEI9M-0l2puNcUs6aE",
+            authDomain: "moen-22130.firebaseapp.com",
+            databaseURL: "https://moen-22130.firebaseio.com",
+            projectId: "moen-22130",
+            storageBucket: "moen-22130.appspot.com",
+            messagingSenderId: "227107602456",
+            appId: "1:227107602456:web:4b92ef488387f82adc036d"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+
+<body>
+
+    <div class="top">
+        <div class="topnavbar" style="font-size: 3vw;">English-Mongolian</div>
+        <div class="popup" id="popup" style="font-size: 2vw;">+10</div>
+        <div class="popup2" id="popup2" style="font-size: 2vw;">-5</div>
+        <div class="Score" id="score" style="font-size: 2vw">Score: 0</div>
+    </div>
+
+    <div class="display-word">
+        <div id = "question" class="display" style="font-size: 5vw;"></div>
+    </div>
+    <div class="choice">
+        
+        <!-- <div class="word" onclick="red()" style="font-size: 2vw;">
+            <div id="letter">B</div>
+            <span id="span">WORD2</span>
+        </div>
+        <div class="word" style="font-size: 2vw;">
+            <div id="letter">C</div>
+            <span id="span">WORD3</span>
+        </div>
+        <div class="word" style="font-size: 2vw;">
+            <div id="letter">D</div>
+            <span id="span">WORD4</span>
+        </div>
+        <div class="word" style="font-size: 2vw;">
+            <div id="letter">E</div>
+            <span id="span">WORD5</span>
+        </div> -->
+    </div>
+
+    <div class="bottom">
+        <div class="bottomnavbar">Product by TEAM 1</div>
+    </div>
+
+    <script src="style.js"></script>
+</body>
+
+</html>
